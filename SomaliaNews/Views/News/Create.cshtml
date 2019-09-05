@@ -1,0 +1,87 @@
+﻿@model SomaliaNews.Models.News
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm("Create", "News", FormMethod.Post, new { enctype ="multipart/form-data"}))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>News</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NewsContext, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <textarea class="form-control" name="NewsContext" rows="15" cols="10">  </textarea>>
+                @Html.ValidationMessageFor(model => model.NewsContext, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="uploadImage" accept="image/*" class="form-control" multiple="multiple"/>
+                @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Side, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                <select class="form-control" name="Side">
+                    <option value="">--Select news Side</option>
+                    <option value="Midle">Midlle Side</option>
+                    <option value="Right"> Right Side</option>
+                    <option value="Left">Left Side</option>
+                </select>
+
+                @Html.ValidationMessageFor(model => model.Side, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NewsReporter, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+              
+                <select class="form-control" name="NewsReporter">
+                    <option value="">--Select news reporter</option>
+                    <option value="Aisha">Aisha from London</option>
+                    <option value="Sumaya"> Sumaya from Paris</option>
+                    <option value="Jama">From Mogudishu</option>
+                </select>
+
+                @Html.ValidationMessageFor(model => model.NewsReporter, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
